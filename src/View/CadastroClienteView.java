@@ -5,6 +5,10 @@
  */
 package View;
 
+import DAO.ClienteDAO;
+import Model.Cliente;
+import Model.Mensagens;
+
 /**
  *
  * @author andre
@@ -66,6 +70,11 @@ public class CadastroClienteView extends javax.swing.JPanel {
         });
 
         jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -130,9 +139,74 @@ public class CadastroClienteView extends javax.swing.JPanel {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         /*
         Campo para escrever a idade do novo funcionario
-        */
+         */
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nome = null;
+        String sobreNome = null;
+        int idade = 0;
+
+        if (jTextField1.getText().isEmpty()) {
+            Mensagens.erro("Escreva o nome", this);
+        } else {
+            nome = jTextField1.getText();
+        }
+
+        if (jTextField2.getText().isEmpty()) {
+            Mensagens.erro("Escreva seu sobre nome", this);
+        } else {
+            sobreNome = jTextField2.getText();
+        }
+
+        try {
+            if (jTextField3.getText().isEmpty()) {
+                Mensagens.erro("Escreva sua idade", this);
+            } else {
+                idade = Integer.parseInt(jTextField3.getText());
+            }
+        } catch (NumberFormatException e) {
+            Mensagens.erro("Escreva apenas numeros para idade", this);
+        }
+
+        if (nome == null || sobreNome == null || idade == 0) {
+            Mensagens.erro("Preencha todos os campos corretamente", this);
+        } else {
+            try {
+                Cliente cliente = new Cliente();
+                ClienteDAO clienteDao = new ClienteDAO();
+                cliente.setNome(nome);
+                cliente.setSobreNome(sobreNome);
+                cliente.setIdade(idade);
+                cliente.setCodigoCliente(0);
+
+                clienteDao.inserirCliente(cliente);
+
+            } catch (NullPointerException e) {
+                Mensagens.erro("Escreva todos os campo", this);
+            } finally {
+                new TelaInicial();
+                Mensagens.ok("Cliente Cadastrado", this);
+            }
+        }
+//        try {
+//            Cliente cliente = new Cliente();
+//            ClienteDAO clienteDao = new ClienteDAO();
+//            cliente.setNome(nome);
+//            cliente.setSobreNome(sobreNome);
+//            cliente.setIdade(idade);
+//            cliente.setCodigoCliente(0);
+//
+//            clienteDao.inserirCliente(cliente);
+//
+//        } catch (NullPointerException e) {
+//            Mensagens.erro("Escreva todos os campo", this);
+//        } finally {
+//            new TelaInicial();
+//        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

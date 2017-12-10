@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author andre
  */
-public class ClienteDAO {
+public class  ClienteDAO {
 
     public ClienteDAO() {
 
@@ -30,7 +30,7 @@ public class ClienteDAO {
         try {
             Connection con = Conexao.abreConexao();
             try {
-                String comando = "insert into Cliente values(null,'?','?')";
+                String comando = "insert into Cliente values(null,?,?)";
                 PreparedStatement pstmt = con.prepareStatement(comando);
                 pstmt.setString(1, cliente.getNome() + " " + cliente.getSobreNome());
                 pstmt.setInt(2, cliente.getIdade());

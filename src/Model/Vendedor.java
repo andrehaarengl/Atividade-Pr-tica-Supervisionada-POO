@@ -19,23 +19,29 @@ public class Vendedor extends Funcionario {
     public Vendedor() {
 
     }
-    
-    public boolean venderProduto(Produto produto) {
+
+    /*
+    Não feito
+     */
+    public boolean venderProduto(Produto produto, int quantProduto) {
         boolean result = false;
         try {
             Connection con = Conexao.abreConexao();
             con.setAutoCommit(false);
             try {
-                String comando = "update Produto set Quantidade=?, where Nome=?";
+                Cliente cliente = new Cliente();
+                produto = cliente.consultarProdrutoById(produto.getCodigoProduto());
+                String comando = "update Produto set Quantidade = ? where idProduto = ?";
                 PreparedStatement pstmt = con.prepareStatement(comando);
-                
-                pstmt.setString(2, produto.getNomeProduto());
-                pstmt.setInt(1, produto.getQuntProduto());
-                pstmt.setInt(3, produto.getQuntProduto());
+                pstmt.setInt(1, produto.getQuntProduto() - quantProduto);
+                //System.out.println(produto.getQuntProduto() - quantProduto);
+                pstmt.setInt(2, produto.getCodigoProduto());
+
                 int q = pstmt.executeUpdate();
                 if (q != 1) {
                     throw new SQLException("Problemas na inserção");
                 }
+                con.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
                 Mensagens.erro("Problemas na inserção", null);
@@ -48,9 +54,6 @@ public class Vendedor extends Funcionario {
         return result;
     }
 
-    
-    
-    
 //    /*
 //    Esse método vai subtrar um produto do estoque
 //     */
@@ -64,5 +67,4 @@ public class Vendedor extends Funcionario {
 //        arquivo.criaArquivo(arquivo.getArquivo();)
 //
 //    }
-
 }

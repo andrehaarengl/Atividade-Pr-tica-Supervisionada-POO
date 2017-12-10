@@ -6,12 +6,13 @@
 package atividade_pratica_supervisionada;
 
 import DAO.CaixaDAO;
-import DAO.FuncionarioDAO;
+import DAO.ClienteDAO;
 import Model.Caixa;
 import Model.Cliente;
 import Model.Funcionario;
-import Model.Gerente;
 import Model.Produto;
+import Model.Vendedor;
+import java.util.List;
 
 /**
  *
@@ -24,37 +25,33 @@ public class main {
      */
     public static void main(String[] args) {
 
-//        // Cadastro de Produtos 
-//        Gerente gerente = new Gerente();
-//        gerente.cadastrarProduto(new Produto(0, "sabonete", 2.70, 50));
-        Funcionario funcionario = new Funcionario();
-        FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+//        Cliente clie = new Cliente();
 //
-        // funcionario.setCofigoFuncionario(0);
-//        funcionario.setNome("Juliana ");
-//        funcionario.setSobreNome("Paula");
-//        funcionario.setIdade(20);
-//        funcionario.setSalarioFixo(1100.00);
-//        funcionario.setTipoFuncionario("Vendedor");
-//        funcionarioDao.inserirFuncionario(funcionario);
-//
-//        Gerente gerente = new Gerente();
-//        System.out.println(gerente.emitirRelatorioEstoque());
-
-//		Cliente cliente = new Cliente();
-//		System.out.println(cliente.consultarProduto("Sabonete"));
-//        CaixaDAO caixaDao = new CaixaDAO();
-//    
-//        Caixa caixa = new Caixa();
+//        Funcionario func = new Funcionario();
+//        Vendedor vende = new Vendedor();
+//        vende.venderProduto(new Produto(1, "sabonete", 0, 0), 10);
 //        
-//        caixaDao.inserirCaixa(caixa, funcionario)
-//    
-//  Cliente cliente = new Cliente();
-//  
-// 
+        //System.out.println(clie.consultarProdutos());
+//        List<Produto> nome = clie.consultarProdutoByName(new Produto(0, "sabonete", 0, 0));
+//        
+//        for (Produto p: nome){
+//            System.out.println(p);
+//        }
+//        
+//        CaixaDAO caixaDao = new CaixaDAO();
+//        caixaDao.inserirCaixa(new Funcionario(0, 0, "Vendedor"));
+//        Cliente cliente = new Cliente();
+//        cliente.setNome("Andre");
+//        cliente.setSobreNome("Haarengl");
+//        cliente.setIdade(22);
+//        cliente.setCodigoCliente(0);
+//        ClienteDAO clienteDao = new ClienteDAO();
+//        clienteDao.inserirCliente(cliente);
+
+    Vendedor vend = new Vendedor();
+    vend.venderProduto(new Produto(2, "", 0, 0), 10);
 
 
     }
-    
 
 }

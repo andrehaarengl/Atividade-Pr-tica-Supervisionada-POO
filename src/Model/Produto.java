@@ -12,7 +12,7 @@ package Model;
 public class Produto {
 
     public Produto() {
-        
+
     }
 
     public Produto(int codigoProduto, String nomeProduto, double valorProduto, int quntProduto) {
@@ -21,7 +21,7 @@ public class Produto {
         this.valorProduto = valorProduto;
         this.quntProduto = quntProduto;
     }
-    
+
     private int codigoProduto;
     private String nomeProduto;
     private double valorProduto;
@@ -59,5 +59,13 @@ public class Produto {
         this.quntProduto = quntProduto;
     }
 
-    
+    public String toString() {
+        String resul = null;
+
+        resul = "Nome : " + this.nomeProduto + "Valor : " + this.valorProduto + 
+                "Quantidade : " + this.quntProduto;
+
+        return resul;
+    }
+
 }

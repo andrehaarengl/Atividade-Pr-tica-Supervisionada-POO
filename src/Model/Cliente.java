@@ -8,7 +8,10 @@ package Model;
 import DAO.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,15 +19,15 @@ import java.sql.SQLException;
  */
 public class Cliente extends Pessoa {
 
+    public Cliente() {
+
+    }
+
     public Cliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
-    
-    private int codigoCliente; 
 
-    public Cliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private int codigoCliente;
 
     public int getCodigoCliente() {
         return codigoCliente;
@@ -33,24 +36,29 @@ public class Cliente extends Pessoa {
     public void setCodigoCliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
+
+    /*
     
-    
-    public boolean consultarProdutoById(Produto produto) {
-        boolean result = false;
+     */
+    public List<Produto> consultarProdutos() {
+        List<Produto> result = new ArrayList<>();
         try {
             Connection con = Conexao.abreConexao();
             try {
-                String comando = "select * from Produto where idProduto = ?";
+                String comando = "select * from Produto";
                 PreparedStatement pstmt = con.prepareStatement(comando);
-                pstmt.setInt(0, produto.getCodigoProduto());
-                int q = pstmt.executeUpdate();
-                if (q != 1) {
-                    throw new SQLException("Problemas na inserção");
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    Produto a = new Produto();
+                    a.setCodigoProduto(rs.getInt("idProduto"));
+                    a.setNomeProduto(rs.getString("Nome"));
+                    a.setValorProduto(rs.getDouble("Valor"));
+                    a.setQuntProduto(rs.getInt("Quantidade"));
+                    result.add(a);
                 }
-                result = true;
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
-                Mensagens.erro("Problemas na inserção", null);
+                Mensagens.erro("Problemas na Consulta", null);
             } finally {
                 Conexao.fechaConexao();
             }
@@ -60,42 +68,101 @@ public class Cliente extends Pessoa {
 
         return result;
     }
-    
-     public boolean consultarProdutoByName(Produto produto) {
-        boolean result = false;
+
+    public List<Produto> consultarProdutoByName(Produto produto) {
+        List<Produto> result = new ArrayList<>();
         try {
             Connection con = Conexao.abreConexao();
             try {
                 String comando = "select * from Produto where Nome = ?";
                 PreparedStatement pstmt = con.prepareStatement(comando);
-                pstmt.setString(0, produto.getNomeProduto());
-                int q = pstmt.executeUpdate();
-                if (q != 1) {
-                    throw new SQLException("Problemas na inserção");
+                pstmt.setString(1, produto.getNomeProduto());
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    Produto a = new Produto();
+                    a.setCodigoProduto(rs.getInt("idProduto"));
+                    a.setNomeProduto(rs.getString("Nome"));
+                    a.setValorProduto(rs.getDouble("Valor"));
+                    a.setQuntProduto(rs.getInt("Quantidade"));
+                    result.add(a);
                 }
-                result = true;
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
-                Mensagens.erro("Problemas na inserção", null);
+                Mensagens.erro("Problemas na Consulta", null);
             } finally {
                 Conexao.fechaConexao();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
 
         return result;
     }
-    
-    
-    
+
+    public List<Produto> consultarProdrutoByIdDois(Produto produto) {
+        //
+        List<Produto> result = new ArrayList<>();
+        try {
+            Connection con = Conexao.abreConexao();
+            try {
+                String comando = "select * from Produto where idProduto= ?";
+                PreparedStatement pstmt = con.prepareStatement(comando);
+                pstmt.setInt(1, produto.getCodigoProduto());
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    Produto a = new Produto();
+                    a.setCodigoProduto(rs.getInt("idProduto"));
+                    a.setNomeProduto(rs.getString("Nome"));
+                    a.setValorProduto(rs.getDouble("Valor"));
+                    a.setQuntProduto(rs.getInt("Quantidade"));
+                    result.add(a);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Mensagens.erro("Problemas na Consulta", null);
+            } finally {
+                Conexao.fechaConexao();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public Produto consultarProdrutoById(int cdProduto) {
+        Produto result = null;
+        try {
+            Connection con = Conexao.abreConexao();
+            try {
+                String comando = "select * from Produto where idProduto= ?";
+                PreparedStatement pstmt = con.prepareStatement(comando);
+                pstmt.setInt(1, cdProduto);
+                ResultSet rs = pstmt.executeQuery();
+                rs.next();
+                Produto a = new Produto();
+                a.setCodigoProduto(rs.getInt("idProduto"));
+                a.setNomeProduto(rs.getString("Nome"));
+                a.setValorProduto(rs.getDouble("Valor"));
+                a.setQuntProduto(rs.getInt("Quantidade"));
+                result = a;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Mensagens.erro("Problemas na Consulta", null);
+            } finally {
+                Conexao.fechaConexao();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+//    public String toString() {
+//        String result = null;
+//
+//        return result;
+//    }
 
 }
-//        Arquivo arquivo = new Arquivo();
-//        arquivo.setLocalDiretorio("./ProdutosBD/");;
-//        arquivo.criarDiretorio(arquivo.getLocalDiretorio());
-//        arquivo.setArquivo("CadastroGerente.txt");
-//        arquivo.criaArquivo(arquivo.getArquivo());
-//        arquivo.lerConteudoArquivo(arquivo.getArquivo(), "Sabonete:2.7:2");
-//        arquivo.lerConteudoArquivo(arquivo.getArquivo(), "");

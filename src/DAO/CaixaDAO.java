@@ -23,7 +23,7 @@ public class CaixaDAO {
     }
     
     
-     public boolean inserirCaixa(Caixa caixa,Funcionario funcionario) {
+     public boolean inserirCaixa(Funcionario funcionario) {
         boolean result = false;
         try {
             Connection con = Conexao.abreConexao();
@@ -31,7 +31,8 @@ public class CaixaDAO {
                 String comando = "insert into Caixa values(null,?)";
                 PreparedStatement pstmt = con.prepareStatement(comando);
                 pstmt.setInt(1, funcionario.getCofigoFuncionario());
-                int q = pstmt.executeUpdate();
+                
+                int q = pstmt.executeUpdate(comando);
                 if (q != 1) {
                     throw new SQLException("Problemas na inserção");
                 }
