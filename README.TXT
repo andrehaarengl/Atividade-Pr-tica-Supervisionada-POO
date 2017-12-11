@@ -12,5 +12,5 @@ Para iniciar a aplicação basta executar no terminal (na pasta dist da raiz do 
 
 java -jar "Atividade_Pratica_Supervisionada.jar"
 
-
+Ou ir na pasta dist raiz do Projeto e dar 2(dois) clicks em "Atividade_Pratica_Supervisionada.jar"
 
