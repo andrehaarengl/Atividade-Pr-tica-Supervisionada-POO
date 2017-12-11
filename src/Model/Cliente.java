@@ -159,10 +159,13 @@ public class Cliente extends Pessoa {
         return result;
     }
 
-//    public String toString() {
-//        String result = null;
-//
-//        return result;
-//    }
+    public String toString() {
+        String result = null;
+        Produto produto = new Produto();
+        result = "Codigo : " + produto.getCodigoProduto() + "Nome :"
+                + produto.getNomeProduto() + " Quantidade " + produto.getQuntProduto()
+                + "Valor " + produto.getValorProduto();
+        return result;
+    }
 
 }

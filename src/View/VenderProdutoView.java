@@ -8,11 +8,13 @@ package View;
 import DAO.FuncionarioDAO;
 import Model.Cliente;
 import Model.Funcionario;
+import Model.Mensagens;
 import Model.Produto;
 import Model.Vendedor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import static javax.swing.UIManager.get;
 
 /**
  *
@@ -25,6 +27,7 @@ public class VenderProdutoView extends javax.swing.JPanel {
      */
     public VenderProdutoView() {
         initComponents();
+        inicializaCombo();
     }
 
     /**
@@ -69,21 +72,17 @@ public class VenderProdutoView extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-
-        jTextField3.setText("jTextField3");
 
         jLabel3.setText("Valor Troco :");
 
@@ -100,30 +99,31 @@ public class VenderProdutoView extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(jButton1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(61, 61, 61)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(24, 24, 24)
-                                            .addComponent(jLabel1)
-                                            .addGap(65, 65, 65))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
-                                    .addGap(48, 48, 48)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jLabel1)
+                                        .addGap(65, 65, 65))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(48, 48, 48)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,8 +163,6 @@ public class VenderProdutoView extends javax.swing.JPanel {
         DefaultComboBoxModel modelProduto = new DefaultComboBoxModel();
         modelProduto.addElement("Selecione o produto...");
         for (Produto produto : alProdutoModel) {
-            cdProduto = produto.getCodigoProduto();
-            nome = produto.getNomeProduto();
             modelProduto.addElement(produto.getNomeProduto());
         }
 
@@ -176,6 +174,7 @@ public class VenderProdutoView extends javax.swing.JPanel {
         /*
         Combo Box para aparecer os produtos diponívies para vender
          */
+        cdProduto = jComboBox1.getSelectedIndex();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -194,10 +193,49 @@ public class VenderProdutoView extends javax.swing.JPanel {
         Vendedor funcVendedor = new Vendedor();
 
         int quantProduto = 0;
-        quantProduto = Integer.parseInt(jTextField2.getText());
-        Produto produto = new Produto();
-        funcVendedor.venderProduto(new Produto(cdProduto, nome, 0, 0), quantProduto);
+        double valorPago = 0, valorTroco = 0;
 
+        try {
+            if (jTextField2.getText().isEmpty()) {
+                Mensagens.erro("Escreva a quantidade que deseja Vender", this);
+            } else {
+                quantProduto = Integer.parseInt(jTextField2.getText());
+            }
+
+        } catch (NumberFormatException e) {
+            Mensagens.erro("Escreva Apenas Números para Quantidade", this);
+        }
+
+        try {
+            if (jTextField1.getText().isEmpty()) {
+                Mensagens.erro("Escreva o valor Pago", this);
+            } else {
+                valorPago = Double.parseDouble(jTextField1.getText());
+            }
+        } catch (NumberFormatException e) {
+            Mensagens.erro("Escreva Apenas Números para o valor Pago", this);
+        }
+
+        Produto produto = new Produto();
+        Cliente cliente = new Cliente();
+        double ValorProduto =  cliente.consultarProdrutoByIdDois(new Produto(cdProduto, "", 0, 0)).get(0).getValorProduto();
+        valorTroco = valorPago - (quantProduto * ValorProduto);
+        
+        jTextField3.setText("R$ " + valorTroco);
+      
+        
+        if (valorPago == 0 || quantProduto == 0 || valorTroco == 0) {
+            Mensagens.erro("Preencha todos os campos corretamente", this);
+        } else {
+            try {
+                funcVendedor.venderProduto(new Produto(cdProduto, "", 0, 0), quantProduto);
+
+            } catch (NullPointerException e) {
+            } finally {
+                Mensagens.ok("Venda Concluída", this);
+            }
+
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
     private static int cdProduto;

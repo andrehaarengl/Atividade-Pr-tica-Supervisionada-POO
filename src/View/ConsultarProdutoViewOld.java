@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
  *
  * @author andre
  */
-public class ConsultarProdutoView extends javax.swing.JPanel {
+public class ConsultarProdutoViewOld extends javax.swing.JPanel {
 
     public static void tela(JPanel jp) {
         js = new JScrollPane(); //painel de rolagem
@@ -30,7 +30,7 @@ public class ConsultarProdutoView extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarProdutoView
      */
-    public ConsultarProdutoView() {
+    public ConsultarProdutoViewOld() {
         initComponents();
     }
 

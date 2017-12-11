@@ -36,7 +36,6 @@ public class Vendedor extends Funcionario {
                 pstmt.setInt(1, produto.getQuntProduto() - quantProduto);
                 //System.out.println(produto.getQuntProduto() - quantProduto);
                 pstmt.setInt(2, produto.getCodigoProduto());
-
                 int q = pstmt.executeUpdate();
                 if (q != 1) {
                     throw new SQLException("Problemas na inserção");
