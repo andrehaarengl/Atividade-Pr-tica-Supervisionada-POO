@@ -20,9 +20,6 @@ public class Vendedor extends Funcionario {
 
     }
 
-    /*
-    Não feito
-     */
     public boolean venderProduto(Produto produto, int quantProduto) {
         boolean result = false;
         try {
@@ -53,17 +50,4 @@ public class Vendedor extends Funcionario {
         return result;
     }
 
-//    /*
-//    Esse método vai subtrar um produto do estoque
-//     */
-//    public void venderProduto(int produ, int qutProdu, String nomeProdu) {
-//        Caixa caixa = new Caixa();
-//        caixa.venderProduo(nomeProdu, produ, qutProdu);
-//        Arquivo arquivo = new Arquivo();
-//        arquivo.setLocalDiretorio("./ProdutosBD/");;
-//        arquivo.criarDiretorio(arquivo.getLocalDiretorio());
-//        arquivo.setArquivo("CadastroGerente.txt");
-//        arquivo.criaArquivo(arquivo.getArquivo();)
-//
-//    }
 }
