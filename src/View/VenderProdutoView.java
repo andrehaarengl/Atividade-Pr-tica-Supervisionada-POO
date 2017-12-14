@@ -11,6 +11,7 @@ import Model.Funcionario;
 import Model.Mensagens;
 import Model.Produto;
 import Model.Vendedor;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -81,6 +82,12 @@ public class VenderProdutoView extends javax.swing.JPanel {
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
             }
         });
 
@@ -218,19 +225,25 @@ public class VenderProdutoView extends javax.swing.JPanel {
 
         Produto produto = new Produto();
         Cliente cliente = new Cliente();
-        double ValorProduto =  cliente.consultarProdrutoByIdDois(new Produto(cdProduto, "", 0, 0)).get(0).getValorProduto();
+        try {
+            ValorProduto = cliente.consultarProdrutoByIdDois(new Produto(cdProduto, "", 0, 0)).get(0).getValorProduto();
+        } catch (IndexOutOfBoundsException e) {
+            Mensagens.erro("Nenhum produto selecionado", this);
+        }
+        DecimalFormat df = new DecimalFormat("0.##");
         valorTroco = valorPago - (quantProduto * ValorProduto);
-        
-        jTextField3.setText("R$ " + valorTroco);
-      
-        
-        if (valorPago == 0 || quantProduto == 0 || valorTroco == 0) {
+        String dx = df.format(valorTroco);
+        if (valorPago == 0 || quantProduto == 0 || valorTroco == 0 || cdProduto == 0) {
             Mensagens.erro("Preencha todos os campos corretamente", this);
+        } else if (valorPago < ValorProduto * quantProduto) {
+            Mensagens.erro("Valor para pagamento insuficiente", this);
         } else {
             try {
                 funcVendedor.venderProduto(new Produto(cdProduto, "", 0, 0), quantProduto);
-
+                jTextField3.setText("R$ " + dx);
             } catch (NullPointerException e) {
+                System.out.println(e);
+                Mensagens.erro("", this);
             } finally {
                 Mensagens.ok("Venda Concluída", this);
             }
@@ -238,6 +251,11 @@ public class VenderProdutoView extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+    private double ValorProduto;
     private static int cdProduto;
     private static String nome;
     private static List<Produto> alProdutoModel = new ArrayList<>();

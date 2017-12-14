@@ -7,6 +7,7 @@ package View;
 
 import DAO.ClienteDAO;
 import Model.Cliente;
+import Model.Mensagens;
 import Model.Produto;
 import java.util.ArrayList;
 import java.util.List;
@@ -180,14 +181,29 @@ public class ConsultarProdutoClienteView extends javax.swing.JPanel {
         nomePrduto = jTextField1.getText();
 
         int codProduto = 0;
-        codProduto = Integer.parseInt(jTextField2.getText());
+        if (jTextField2.getText().isEmpty()) {
+            codProduto = 0;
+
+        } else {
+            codProduto = Integer.parseInt(jTextField2.getText());
+        }
 
         Cliente cliente = new Cliente();
-
-        if (!jTextField1.getText().isEmpty()) {
-            jTextField3.setText("R$ " + (cliente.consultarProdutoByName(new Produto(0, nomePrduto, 0, 0))).get(0).getValorProduto());
-        } else {
-            jTextField3.setText("R$ " + (cliente.consultarProdrutoByIdDois(new Produto(codProduto, "", 0, 0))).get(0).getValorProduto());
+        try {
+            if (!jTextField1.getText().isEmpty()) {
+                jTextField3.setText("R$ " + (cliente.consultarProdutoByName(new Produto(0, nomePrduto, 0, 0))).get(0).getValorProduto());
+                Mensagens.ok("Produto encontrado", this);
+            } else if (!jTextField2.getText().isEmpty()) {
+                jTextField3.setText("R$ " + (cliente.consultarProdrutoByIdDois(new Produto(codProduto, "", 0, 0))).get(0).getValorProduto());
+                Mensagens.ok("Produto encontrado", this);
+            } else if (jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty()) {
+                Mensagens.erro("Digite ao Menos o nome ou codigo do Produto", this);
+            } else {
+                Mensagens.erro("Produto indiposnível", this);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e);
+            Mensagens.erro("Produto não encontrado", this);
         }
 
 
