@@ -4,12 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/View/TelaInicial.java</file>
-            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/View/CadastroClienteView.java</file>
-            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/Model/Vendedor.java</file>
-            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/Model/Cliente.java</file>
-            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/View/VenderProdutoView.java</file>
-            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/View/ConsultarProdutoClienteView.java</file>
-            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/DAO/ClienteDAO.java</file>
+            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/View/About.java</file>
+            <file>file:/home/andre/Documentos/UFG/2017.2/Programação%20Orientada%20a%20Objeto/Atividade-Pr-tica-Supervisionada-POO/src/View/RelatorioEstoque.java</file>
         </group>
     </open-files>
 </project-private>

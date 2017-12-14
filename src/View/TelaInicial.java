@@ -48,7 +48,10 @@ public class TelaInicial extends javax.swing.JFrame {
         desk = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         openMenuItem = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
@@ -66,6 +69,16 @@ public class TelaInicial extends javax.swing.JFrame {
         fileMenu.setMnemonic('f');
         fileMenu.setText("Funcionário");
 
+        jMenu3.setText("Gerente");
+
+        jMenuItem5.setText("Relatório de Estoque");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Cadastrar Produto");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +86,11 @@ public class TelaInicial extends javax.swing.JFrame {
                 openMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(openMenuItem);
+        jMenu3.add(openMenuItem);
+
+        fileMenu.add(jMenu3);
+
+        jMenu2.setText("Vendedor");
 
         saveAsMenuItem.setMnemonic('a');
         saveAsMenuItem.setText("Vender Produto");
@@ -82,7 +99,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 saveAsMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(saveAsMenuItem);
+        jMenu2.add(saveAsMenuItem);
+
+        fileMenu.add(jMenu2);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -171,6 +190,10 @@ public class TelaInicial extends javax.swing.JFrame {
         tela(new ConsultarProdutoClienteView());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        tela(new RelatorioEstoque());
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,10 +243,13 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
